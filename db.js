@@ -1,10 +1,14 @@
-const mysql = require('mysql2/promise');
+const mysql = require("mysql2");
+require("dotenv").config();
 
 const db = mysql.createPool({
-  host: 'sql12.freesqldatabase.com',
-  user: 'sql12792795',
-  password: 'qlxS6T2Uz6',
-  database: 'sql12792795',
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0
 });
 
-module.exports = db;
+module.exports = db.promise();
