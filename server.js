@@ -3,14 +3,18 @@ const cors = require("cors");
 const contactRoutes = require("./routes/contact");
 
 const app = express();
+const PORT = process.env.PORT || 10000;
+
 app.use(cors());
 app.use(express.json());
 
-// Use your contact routes
+// ✅ Mount routes at /api/contact
 app.use("/api/contact", contactRoutes);
 
-// Start server
-const PORT = process.env.PORT || 10000;
+app.get("/", (req, res) => {
+  res.send("Backend is running");
+});
+
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });
